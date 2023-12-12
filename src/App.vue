@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 
+const keyword = ref ('')
 const users = ref([
     {
         id: 1,
@@ -34,6 +35,7 @@ const users = ref([
 
 <template>
   <div id="app">
+    <input type="text" v-model="keyword">
     <table>
         <tr v-for="user in users" :key="user.id">
             <td v-text="user.id"></td>
