@@ -1,47 +1,49 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue';
+
+const users = ref([
+    {
+        id: 1,
+        name: '鈴木太郎',
+        email: 'suzukitaro@example.com'
+    },
+    {
+        id: 2,
+        name: '佐藤二郎',
+        email: 'satoujiro@example.com'
+    },
+    {
+        id: 3,
+        name: '田中三郎',
+        email: 'tanakasaburo@example.com'
+    },
+    {
+        id: 4,
+        name: '山本四郎',
+        email: 'yamamotoshiro@example.com'
+    },
+    {
+        id: 5,
+        name: '高橋五郎',
+        email: 'takahashigoro@example.com'
+    }
+  ]);
+    
+
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <div id="app">
+    <table>
+        <tr v-for="user in users" :key="user.id">
+            <td v-text="user.id"></td>
+            <td v-text="user.name"></td>
+            <td v-text="user.email"></td>
+        </tr>
+    </table>
+</div>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-}
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
 </style>
