@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
-const keyword = ref ('')
+const keyword = ref ('');
 const users = ref([
     {
         id: 1,
@@ -29,7 +29,17 @@ const users = ref([
         email: 'takahashigoro@example.com'
     }
   ]);
-    
+  const filteredUsers = computed(() => {
+      const filteredUsers = [];
+
+      for (const user of users.value) {
+        if (user.name.includes(keyword.value) || user.email.includes(keyword.value)) {
+          filteredUsers.push(user);
+        }
+      }
+
+      return filteredUsers;
+    });
 
 </script>
 
@@ -37,7 +47,7 @@ const users = ref([
   <div id="app">
     <input type="text" v-model="keyword">
     <table>
-        <tr v-for="user in users" :key="user.id">
+        <tr v-for="user in filteredUsers" :key="user.id">
             <td v-text="user.id"></td>
             <td v-text="user.name"></td>
             <td v-text="user.email"></td>
