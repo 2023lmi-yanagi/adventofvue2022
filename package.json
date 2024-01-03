@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "debounce": "^2.0.0",
     "vue": "^3.3.10"
   },
   "devDependencies": {

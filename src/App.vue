@@ -1,5 +1,14 @@
 <script setup>
+// [x]ユーザーのリストを出す
+// [x]入力フォームを作る
+// [x]入力フォームに入力された文字列でリストをフィルターする
+// [x]debounce（絞り込みを遅延させる）処理をフィルターに組み込む
+//   -ライブラリを探して、それを使えるよう
+//   -自分で作ってみる（サンプルコードを見つけて参考で実践する）（多分こういうこと、多分こういうことなんじゃないか）
+// ...dummy Json APIからとってくる
+
 import { ref, computed } from 'vue';
+import { debounce } from "debounce";
 
 const keyword = ref ('');
 const users = ref([
@@ -29,7 +38,7 @@ const users = ref([
         email: 'takahashigoro@example.com'
     }
   ]);
-  const filteredUsers = computed(() => {
+  const filteredUsers = ref(() => {
       const filteredUsers = [];
 
       for (const user of users.value) {
@@ -41,13 +50,15 @@ const users = ref([
       return filteredUsers;
     });
 
+window.debouncedFilteredUsers = debounce(filteredUsers, 200);
+
 </script>
 
 <template>
   <div id="app">
     <input type="text" v-model="keyword">
     <table>
-        <tr v-for="user in filteredUsers" :key="user.id">
+        <tr v-for="user in debouncedFilteredUsers" :key="user.id">
             <td v-text="user.id"></td>
             <td v-text="user.name"></td>
             <td v-text="user.email"></td>
